@@ -75,7 +75,8 @@ scaler = load_scaler()
 st.title("✈️ Flight Anomaly Detector")
 st.markdown("Detects **Speed High**, **Path High**, and **Flaps Late** anomalies using a 1D CNN trained on DASHlink data.")
 
-tab1, tab2 = st.tabs(["📁 Upload CSV", "🎛️ Manual Input"])
+# Added tab3 here
+tab1, tab2, tab3 = st.tabs(["📁 Upload CSV", "🎛️ Manual Input", "📄 Project Description"])
 
 # ─────────────────────────────────────────────
 # Helper: preprocess & predict
@@ -163,3 +164,21 @@ with tab2:
             X   = preprocess(arr)
             score, label = run_prediction(X)
         show_result(score, label)
+
+# ─────────────────────────────────────────────
+# TAB 3 — Project Description (PDF Viewer)
+# ─────────────────────────────────────────────
+with tab3:
+    st.markdown("### Project Documentation")
+
+    
+    pdf_url = "Anomaly_Detection.pdf"
+
+    # Option A: Embed via raw GitHub URL using HTML iframe
+    iframe_code = f"""
+    <iframe src="{pdf_url}" width="100%" height="800px" style="border:none;">
+        It looks like your browser doesn't support inline PDFs. 
+        <a href="{pdf_url}">Click here to download/view the PDF</a>.
+    </iframe>
+    """
+    st.components.v1.html(iframe_code, height=820)
